@@ -2,15 +2,32 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-between; 
 
-    img {
-        width: 40px;
-        height: 40px;
-    }
-
-    .teste {
+    nav {
         display: flex;
-        gap: 8px;
+        gap: 0.5rem;
     }
+
+    a {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: ${props => props.theme['gray-100']};
+        
+        border-bottom: 3px solid transparent;        
+    }
+
+    a:hover {
+        border-bottom: 3px solid ${props => props.theme['green-500']};
+    }
+
+    &.active {
+        color: ${props => props.theme['green-500']};
+    }
+
 `

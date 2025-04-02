@@ -20,3 +20,4 @@ export const defaulTheme = {
 
     'yellow-500': '#FBA94C',
 }
+

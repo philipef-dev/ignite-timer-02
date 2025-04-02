@@ -1,18 +1,30 @@
-import Logo from '../../assets/Logo.svg';
-import Clock from '../../assets/clock-item.svg';
-import Menu from '../../assets/menu-item.svg';
+import { Scroll, Timer } from 'phosphor-react';
+import logoIgnite from '../../assets/Logo.svg';
 import { HeaderContainer } from './styles';
+import { NavLink } from 'react-router';
 
 export function Header() {
     return (
         <HeaderContainer>
-            <div>
-                <img src={Logo} alt="" />
-            </div>
-            <div className='teste'>
-                <img src={Clock} alt="" />
-                <img src={Menu} alt="" />
-            </div>
+            <span>
+                <img src={logoIgnite} alt="" />
+            </span>
+            <nav>
+                <NavLink
+                    to="/"
+                    title="Timer"
+                    className={({ isActive }) => isActive ? "active" : ""}
+                >
+                    <Timer size={24} />
+                </NavLink>
+                <NavLink
+                    to='history'
+                    title='Histórico'
+                    className={({ isActive }) => isActive ? "active" : ""}
+                >
+                    <Scroll size={24} />
+                </NavLink>
+            </nav>
         </HeaderContainer>
     )
 }

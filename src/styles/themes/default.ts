@@ -1,6 +1,6 @@
-export const defaultheme = {
-    'white': '#FFF',
-    'black': '#2F2F33',
+export const defaulTheme = {
+    white: '#FFF',
+    black: '#2F2F33',
 
     'gray-100': '#E1E1E6',
     'gray-300': '#C4C4CC',

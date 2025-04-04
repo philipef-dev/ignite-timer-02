@@ -52,7 +52,17 @@ export const Separator = styled.div`
 `
 
 export const StartCountDownButton = styled.button`
-    
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 
+    border: none;
+    border-radius: 8px;
+    color: ${props => props.theme['gray-100']};
+    background-color: ${props => props.theme['green-500']};
+    padding: 1rem;
 
+    font-weight: bold;
 `

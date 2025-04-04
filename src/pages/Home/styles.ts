@@ -26,7 +26,7 @@ export const FormContainer = styled.div`
     font-size: 1.125rem;
     font-weight: bold;
     flex-wrap: wrap;
-`;
+`
 
 export const ContDownContainer = styled.div`
     font-family: 'Roboto Mono', sans-serif;
@@ -42,13 +42,16 @@ export const ContDownContainer = styled.div`
         background-color: ${props => props.theme['gray-700']};
         border-radius: 8px;
     }
-`;
+`
 
 export const Separator = styled.div`
     padding: 2rem 0;
     color: ${props => props.theme['green-500']};
     display: flex;
     justify-content: center;
+`
+
+export const StartCountDownButton = styled.button`
     
 
 

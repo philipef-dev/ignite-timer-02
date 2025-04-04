@@ -57,6 +57,7 @@ export const StartCountDownButton = styled.button`
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    cursor: pointer;
 
     border: none;
     border-radius: 8px;
@@ -65,4 +66,13 @@ export const StartCountDownButton = styled.button`
     padding: 1rem;
 
     font-weight: bold;
+
+    &:disabled {
+        background-color: ${props => props.theme['green-500']};
+        cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
+        background-color: ${props => props.theme['green-700']};
+    }
 `

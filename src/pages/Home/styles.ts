@@ -76,3 +76,22 @@ export const StartCountDownButton = styled.button`
         background-color: ${props => props.theme['green-700']};
     }
 `
+
+export const BaseInput = styled.input`
+    background-color: transparent;
+    border: none;
+    height: 2.5rem;
+    border-bottom: 2px solid ${props => props.theme['gray-500']};
+    font-weight: bold;
+    font-size: 1.125rem;
+    padding: 0 0.5rem;
+    color: ${props => props.theme['gray-100']};
+`
+
+export const TaskInput = styled(BaseInput)`
+    flex: 1;
+`
+
+export const MinutsAmountInput = styled(BaseInput)`
+    width: 4rem;
+`

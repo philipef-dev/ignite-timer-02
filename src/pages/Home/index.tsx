@@ -26,7 +26,7 @@ export function Home() {
                     <span>0</span>
                     <span>0</span>
                 </ContDownContainer>
-                <StartCountDownButton type="submit">
+                <StartCountDownButton type="submit" disabled>
                     <Play size={24} />
                     Começar
                 </StartCountDownButton>

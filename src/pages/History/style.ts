@@ -58,3 +58,8 @@ export const HistoryList = styled.div`
         }
     }
 `
+
+export const StatusView = styled.span`
+
+
+`

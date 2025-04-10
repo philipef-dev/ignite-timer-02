@@ -101,10 +101,10 @@ export const BaseInput = styled.input`
 export const TaskInput = styled(BaseInput)`
     flex: 1;
 
+    /* Isso daqui serve para tirar a setinha do lado do input number no googleChroome */
     &::-webkit-calendar-picker-indicator {
         display: none !important;
     }
-
 `
 
 export const MinutsAmountInput = styled(BaseInput)`

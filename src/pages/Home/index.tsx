@@ -1,20 +1,42 @@
 import { useForm } from 'react-hook-form';
 import { Play } from "phosphor-react";
-import { ContDownContainer, FormContainer, HomeContainer, MinutsAmountInput, Separator, StartCountDownButton, TaskInput } from "./styles";
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from "zod";
+import {
+    ContDownContainer,
+    FormContainer,
+    HomeContainer,
+    MinutsAmountInput,
+    Separator,
+    StartCountDownButton,
+    TaskInput
+} from "./styles";
 
-type FormInputs = {
-    tasks: string,
-    minutesAmount: number
-}
+const newCycleFormValidationSchema = zod.object({
+    task: zod.string()
+        .min(1, { message: "Informe a tarefa" }),
+    minutesAmount: zod.number()
+        .min(5, { message: "O ciclo precisa ser de no mínimo 5 minutos" })
+        .max(60, { message: "O ciclo precisa ser de no mínimo 60 minutos" })
+})
+
+type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
 
 export function Home() {
-    const { register, handleSubmit, watch } = useForm<FormInputs>();
+    const { register, handleSubmit, watch, reset } = useForm<NewCycleFormData>({
+        resolver: zodResolver(newCycleFormValidationSchema),
+        defaultValues: {
+            task: '',
+            minutesAmount: 0
+        }
+    });
 
-    function handleCreateNewCycle(data: FormInputs) {
-        console.log(data)
+    function handleCreateNewCycle(data: NewCycleFormData) {
+        console.log(data);
+        reset();
     }
 
-    const task = watch('tasks');
+    const task = watch('task');
     const minutes = watch('minutesAmount');
 
     const isSubmitDisabled = !task || !minutes;
@@ -29,7 +51,7 @@ export function Home() {
                         id="task"
                         list="task-suggestions"
                         placeholder="Dê um nome para o seu projeto"
-                        {...register('tasks')}
+                        {...register('task')}
                     />
                     <datalist id="task-suggestions">
                         <option value="Projeto 1" />

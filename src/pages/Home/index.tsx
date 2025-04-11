@@ -10,9 +10,8 @@ type FormInputs = {
 export function Home() {
     const { register, handleSubmit, watch } = useForm<FormInputs>();
 
-    function handleCreateNewCycle(data: any) {
+    function handleCreateNewCycle(data: FormInputs) {
         console.log(data)
-
     }
 
     const task = watch('tasks');

@@ -11,7 +11,8 @@ import {
     StartCountDownButton,
     TaskInput
 } from "./styles";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { differenceInSeconds } from 'date-fns';
 
 const newCycleFormValidationSchema = zod.object({
     task: zod.string()
@@ -27,12 +28,13 @@ interface cycleProps {
     id: string;
     task: string;
     minutesAmount: number;
+    startDate: Date;
 }
 
 export function Home() {
     const [cycles, setCycles] = useState<cycleProps[]>([]);
     const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
-    const [ amontSecondsPassed, setAmountSecondsPassed] = useState(0);
+    const [amontSecondsPassed, setAmountSecondsPassed] = useState(0);
 
     const { register, handleSubmit, watch, reset } = useForm<NewCycleFormData>({
         resolver: zodResolver(newCycleFormValidationSchema),
@@ -42,22 +44,31 @@ export function Home() {
         }
     });
 
+    const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
+
+    useEffect(() => {
+        if (activeCycle) {
+            setInterval(() => {
+                setAmountSecondsPassed(differenceInSeconds(new Date, activeCycle.startDate));
+            }, 1000);
+        }
+    }, [activeCycle]);
+
     function handleCreateNewCycle(data: NewCycleFormData) {
-        const id = String(new Date().getTime())         
-        
+        const id = String(new Date().getTime())
+
         const newCycle: cycleProps = {
             id,
             task: data.task,
-            minutesAmount: data.minutesAmount            
+            minutesAmount: data.minutesAmount,
+            startDate: new Date()
         }
 
-        setCycles((prevCycles) => [...prevCycles, newCycle ]);
+        setCycles((prevCycles) => [...prevCycles, newCycle]);
         setActiveCycleId(id);
 
         reset();
     }
-
-    const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
 
     const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
     const currentSeconds = activeCycle ? totalSeconds - amontSecondsPassed : 0;
@@ -66,8 +77,7 @@ export function Home() {
     const secondsAmount = currentSeconds % 60;
 
     const minutes = String(minutesAmount).padStart(2, "0");
-    const seconds = String(secondsAmount).padStart(2, "0"); 
-
+    const seconds = String(secondsAmount).padStart(2, "0");
 
     const task = watch('task');
     const minutesTask = watch('minutesAmount');

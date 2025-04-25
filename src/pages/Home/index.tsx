@@ -12,7 +12,7 @@ import {
     TaskInput
 } from "./styles";
 import { useEffect, useState } from 'react';
-import { differenceInSeconds } from 'date-fns';
+import { differenceInSeconds, interval } from 'date-fns';
 
 const newCycleFormValidationSchema = zod.object({
     task: zod.string()
@@ -47,10 +47,18 @@ export function Home() {
     const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
 
     useEffect(() => {
+        let interval: number
+
         if (activeCycle) {
-            setInterval(() => {
-                setAmountSecondsPassed(differenceInSeconds(new Date, activeCycle.startDate));
+            interval = setInterval(() => {
+                setAmountSecondsPassed(
+                    differenceInSeconds(new Date, activeCycle.startDate)
+                );
             }, 1000);
+        }
+
+        return () => {
+            clearInterval(interval);
         }
     }, [activeCycle]);
 
@@ -66,9 +74,10 @@ export function Home() {
 
         setCycles((prevCycles) => [...prevCycles, newCycle]);
         setActiveCycleId(id);
+        setAmountSecondsPassed(0);
 
         reset();
-    }
+    }    
 
     const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
     const currentSeconds = activeCycle ? totalSeconds - amontSecondsPassed : 0;
@@ -78,6 +87,10 @@ export function Home() {
 
     const minutes = String(minutesAmount).padStart(2, "0");
     const seconds = String(secondsAmount).padStart(2, "0");
+
+    useEffect(() => {
+        document.title = `${minutes} : ${seconds}`
+    }, [minutes, seconds])
 
     const task = watch('task');
     const minutesTask = watch('minutesAmount');

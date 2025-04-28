@@ -43,7 +43,7 @@ export function Home() {
             minutesAmount: 0
         }
     });
-
+    // codigo para saber qual ciclo esta tivo
     const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
 
     useEffect(() => {

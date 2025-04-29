@@ -30,6 +30,7 @@ interface cycleProps {
     task: string;
     minutesAmount: number;
     startDate: Date;
+    interruputDate?: Date;
 }
 
 export function Home() {
@@ -78,10 +79,18 @@ export function Home() {
         setAmountSecondsPassed(0);
 
         reset();
+    }
 
-        if (activeCycle.minutesAmount === 0) {
-            alert('Ciclo finalizado');
-        }
+    function handleInterruptCycle() {
+        setActiveCycleId(null);
+        setCycles(cycles.map((cycle) => {
+            if (cycle.id === activeCycleId) {
+                return { ...cycle, interruputDate: new Date() }
+            } else {
+                return cycle;
+            }
+        })
+        )
     }
 
     const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
@@ -142,7 +151,7 @@ export function Home() {
                     <span>{seconds[1]}</span>
                 </ContDownContainer>
                 {activeCycle ?
-                    <InterruptCountDownButton type="button">
+                    <InterruptCountDownButton type="button" onClick={handleInterruptCycle}>
                         <HandPalm size={24} />
                         Interromper
                     </InterruptCountDownButton> :
@@ -151,7 +160,6 @@ export function Home() {
                         Começar
                     </StartCountDownButton>
                 }
-
             </form>
         </HomeContainer >
     )

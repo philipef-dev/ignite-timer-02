@@ -114,7 +114,7 @@ export const TaskInput = styled(BaseInput)`
 
     /* Isso daqui serve para tirar a setinha do lado do input number no googleChroome */
     &::-webkit-calendar-picker-indicator {
-        display: none !important;
+        display: none;
     }
 `
 

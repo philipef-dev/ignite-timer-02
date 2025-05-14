@@ -1,4 +1,4 @@
-// Entendendo contexto
+// Entendendo contexto teoria
 
 import { createContext, useContext, useState } from 'react';
 

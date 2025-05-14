@@ -154,7 +154,7 @@ export function Home() {
                         id="minutesAmount"
                         placeholder="00"
                         disabled={!!activeCycle}
-                        step={5} 
+                        step={5}
                         min={5}
                         max={60}
                         {...register("minutesAmount", {

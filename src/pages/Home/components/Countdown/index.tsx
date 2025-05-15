@@ -1,10 +1,18 @@
-import { use, useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContDownContainer, Separator } from "./styles"
 import { differenceInSeconds } from "date-fns";
 import { CyclesContext } from "../..";
 
 export const Conutdown = () => {
-    const { activeCycle} = useContext(CyclesContext);
+    const {
+        activeCycle,
+        activeCycleId,
+        amountSecondsPassed,
+        markCurrentCycleAsFinished,
+        setSecondsPassed
+    } = useContext(CyclesContext);
+
+    const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
 
     useEffect(() => {
         let interval: number
@@ -17,18 +25,12 @@ export const Conutdown = () => {
                 )
 
                 if (secondsDifference >= totalSeconds) {
-                    setCycles((state) => state.map((cycle) => {
-                        if (cycle.id === activeCycleId) {
-                            return { ...cycle, finisheDate: new Date() }
-                        } else {
-                            return cycle;
-                        }
-                    }))
+                    markCurrentCycleAsFinished();
 
-                    setAmountSecondsPassed(totalSeconds);
+                    setSecondsPassed(totalSeconds);
                     clearInterval(interval);
                 } else {
-                    setAmountSecondsPassed(secondsDifference);
+                    setSecondsPassed(secondsDifference);
                 }
             }, 1000);
         }
@@ -36,10 +38,9 @@ export const Conutdown = () => {
         return () => {
             clearInterval(interval);
         }
-    }, [activeCycle, totalSeconds, activeCycleId]);
+    }, [activeCycle, totalSeconds, activeCycleId, markCurrentCycleAsFinished]);
 
-    const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
-    const currentSeconds = activeCycle ? totalSeconds - amontSecondsPassed : 0;
+    const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0;
 
     const minutesAmount = Math.floor(currentSeconds / 60);
     const secondsAmount = currentSeconds % 60;

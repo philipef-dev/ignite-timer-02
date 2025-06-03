@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useState } from "react";
 
 interface CreateCycleDate {
-    task: string,
-    minutesAmount: number
+    task?: string,
+    minutesAmount?: number
 }
 
 interface Cycle {

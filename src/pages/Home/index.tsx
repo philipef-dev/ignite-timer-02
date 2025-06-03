@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import * as zod from "zod";
 import { NewCycleForm } from './components/NewCycleForm';
 import { Conutdown } from './components/Countdown';
 import { HandPalm, Play } from "phosphor-react";
-import { HomeContainer, InterruptCountDownButton, StartCountDownButton } from "./styles";
 import { CyclesContext } from "../../context/CyclesContext";
+import { HomeContainer, InterruptCountDownButton, StartCountDownButton } from "./styles";
 
 const newCycleFormValidationSchema = zod.object({
     task: zod.string()

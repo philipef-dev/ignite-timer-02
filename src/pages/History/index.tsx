@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { HistoryContainer, HistoryList, StatusView } from "./styles";
 import { CyclesContext } from "../../context/CyclesContext";
+import {formatDistance} from 'date-fns'
 
 export function History() {
     const { cycles } = useContext(CyclesContext);

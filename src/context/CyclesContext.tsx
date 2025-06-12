@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useReducer, useState } from "react";
 
 interface CreateCycleDate {
     task?: string,
@@ -34,7 +34,7 @@ interface CycleContextProviderProps {
 export function CyclesContextProvider({
     children
 }: CycleContextProviderProps) {
-    const [cycles, setCycles] = useState<Cycle[]>([]);
+    const [cycles, setCycles] = useReducer({}, [])
     const [activeCycleId, setActiveCycleId] = useState<string | null>(null);
     const [amountSecondsPassed, setAmountSecondsPassed] = useState(0);
 
@@ -79,8 +79,6 @@ export function CyclesContextProvider({
         setCycles((prevCycles) => [...prevCycles, newCycle]);
         setActiveCycleId(id);
         setAmountSecondsPassed(0);
-
-        // reset();
     }
 
     return (

@@ -1,20 +1,28 @@
-import { Cycle } from "../context/CyclesContext";
+import { ActionTypes } from "./actions";
+
+export interface Cycle {
+    id: string;
+    task: string;
+    minutesAmount: number;
+    startDate: Date;
+    interruputDate?: Date;
+    finishDate?: Date;
+}
 
 interface CyclesState {
     cycles: Cycle[];
     activeCycleId: string | null;
 }
 
-
 export function cyclesReducer(state: CyclesState, action: any) {
     switch (action.type) {
-        case "ADD_NEW_CYCLE":
+        case ActionTypes.ADD_NEW_CYCLE:
             return {
                 ...state,
                 cycles: [...state.cycles, action.payload.newCycle],
                 activeCycleId: action.payload.newCycle.id
             };
-        case "INTERRUPT_CURRENT_CYCLE":
+        case ActionTypes.INTERRUPT_CURRENT_CYCLE:
             return {
                 ...state,
                 cycles: state.cycles.map((cycle) => {
@@ -26,7 +34,7 @@ export function cyclesReducer(state: CyclesState, action: any) {
                 }),
                 activeCycleId: null
             };
-        case "MARK_CURRENTY_CYCLE_FINISHED":
+        case ActionTypes.MARK_CURRENTY_CYCLE_FINISHED:
             return {
                 ...state,
                 cycles: state.cycles.map((cycle) => {
@@ -41,4 +49,4 @@ export function cyclesReducer(state: CyclesState, action: any) {
         default:
             return state
     }
-}
+} 

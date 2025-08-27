@@ -1,54 +1,53 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const HomeContainer = styled.main`
-    flex: 1;
+  flex: 1;
 
-    display: flex; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-
-    form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 3.5rem;
-    }      
-`
+    gap: 3.5rem;
+  }
+`;
 
 export const BaseCountDownButton = styled.button`
-    width: 100%;
-    display: flex;
-    color: ${props => props.theme['gray-100']};
-    padding: 1rem;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    cursor: pointer;
+  width: 100%;
+  display: flex;
+  color: ${(props) => props.theme['gray-100']};
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
 
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
 
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`;
 
-    &:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-    }
-`
+export const StartCountDownButton = styled(BaseCountDownButton)`
+  background-color: ${(props) => props.theme['green-500']};
 
-export const StartCountDownButton = styled(BaseCountDownButton)`    
-    background-color: ${props => props.theme['green-500']};
-
-    &:not(:disabled):hover {
-        background-color: ${props => props.theme['green-700']};
-    }
-`
+  &:not(:disabled):hover {
+    background-color: ${(props) => props.theme['green-700']};
+  }
+`;
 
 export const InterruptCountDownButton = styled(BaseCountDownButton)`
-    background-color: ${props => props.theme['red-500']};
+  background-color: ${(props) => props.theme['red-500']};
 
-    &:not(:disabled):hover {
-        background-color: ${props => props.theme['red-700']};
-    }
-`
+  &:not(:disabled):hover {
+    background-color: ${(props) => props.theme['red-700']};
+  }
+`;
